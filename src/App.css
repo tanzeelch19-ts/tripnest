@@ -1,0 +1,195 @@
+/* ==========================================================================
+   TripNest styles (Tailwind CSS v4)
+
+   Components are styled with Tailwind utility classes in the JSX. This file
+   only holds what utilities cannot express on their own:
+
+   1. Theme tokens. Colors are CSS variables that change under
+      [data-theme='dark'], and the @theme block below maps them to Tailwind
+      names (bg-surface, text-ink-2, border-line ...). Because the variables
+      switch with the theme, components never need a dark: variant.
+      Text pairs were checked for at least 4.5:1 contrast in both themes
+      (links use brand-strong because brand alone is too light on the page).
+   2. A few base rules (focus ring, headings, reduced motion).
+   3. Two small custom utilities: container and skeleton.
+   ========================================================================== */
+
+/* Only scan this folder for class names. */
+@import 'tailwindcss';
+
+/* Lets you write dark:... utilities if you ever need one; they follow the theme switch. */
+@custom-variant dark (&:where([data-theme='dark'], [data-theme='dark'] *));
+
+/* ---------- Theme variables ---------- */
+
+:root {
+  color-scheme: light;
+
+  /* Surfaces and text */
+  --bg: #eaf1ef;
+  --surface: #ffffff;
+  --surface-2: #f3f8f7;
+  --ink: #0c2b33;
+  --ink-2: #425d64;
+  --line: #ccdbd7;
+  --line-strong: #6e8e89;
+
+  /* Brand */
+  --brand: #0b7a75;
+  --brand-strong: #07615d;
+  --brand-ink: #ffffff;
+  --brand-soft: #d5ebe7;
+  --accent: #f2b01e;
+  --accent-ink: #3a2a00;
+  --focus: #0b7a75;
+
+  /* Status */
+  --heart: #d92d3a;
+  --danger: #b3261e;
+  --danger-soft: #fbe4e1;
+  --ok: #156b3a;
+  --ok-soft: #ddf1e4;
+  --warn: #8a5a00;
+  --warn-soft: #fbefd0;
+
+  /* Depth */
+  --shadow-1: 0 1px 2px rgba(12, 43, 51, 0.1);
+  --shadow-2: 0 22px 44px -22px rgba(12, 43, 51, 0.4);
+
+  /* Layout */
+  --gutter: clamp(1rem, 4vw, 2rem);
+  --header-h: 68px;
+}
+
+:root[data-theme='dark'] {
+  color-scheme: dark;
+
+  --bg: #071a1f;
+  --surface: #0f2830;
+  --surface-2: #143039;
+  --ink: #e7f2ef;
+  --ink-2: #a6bebb;
+  --line: #24424b;
+  --line-strong: #5b808a;
+
+  --brand: #4cc9be;
+  --brand-strong: #7ae0d6;
+  --brand-ink: #04211f;
+  --brand-soft: #123a3f;
+  --accent: #f6c453;
+  --focus: #7ae0d6;
+
+  --heart: #ff7a80;
+  --danger: #ff8b84;
+  --danger-soft: #3a1b1b;
+  --ok: #6fd39a;
+  --ok-soft: #12331f;
+  --warn: #f6c453;
+  --warn-soft: #3a2d08;
+
+  --shadow-1: 0 1px 2px rgba(0, 0, 0, 0.5);
+  --shadow-2: 0 22px 44px -22px rgba(0, 0, 0, 0.75);
+}
+
+/* ---------- Tailwind theme ---------- */
+
+@theme {
+  --font-sans: 'Bricolage Grotesque', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --radius-card: 16px;
+  --radius-hero: 28px;
+}
+
+/* "inline" makes utilities read the live variable, so they follow the theme switch. */
+@theme inline {
+  --color-page: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-ink: var(--ink);
+  --color-ink-2: var(--ink-2);
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+  --color-brand: var(--brand);
+  --color-brand-strong: var(--brand-strong);
+  --color-brand-ink: var(--brand-ink);
+  --color-brand-soft: var(--brand-soft);
+  --color-accent: var(--accent);
+  --color-accent-ink: var(--accent-ink);
+  --color-focus: var(--focus);
+  --color-heart: var(--heart);
+  --color-danger: var(--danger);
+  --color-danger-soft: var(--danger-soft);
+  --color-ok: var(--ok);
+  --color-ok-soft: var(--ok-soft);
+  --color-warn: var(--warn);
+  --color-warn-soft: var(--warn-soft);
+  --shadow-soft: var(--shadow-1);
+  --shadow-lift: var(--shadow-2);
+}
+
+/* ---------- Base ---------- */
+
+@layer base {
+  html {
+    scroll-padding-top: calc(var(--header-h) + 16px);
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -0.015em;
+    text-wrap: balance;
+  }
+
+  :focus-visible {
+    outline: 3px solid var(--focus);
+    outline-offset: 2px;
+  }
+
+  ::selection {
+    background: var(--brand);
+    color: var(--brand-ink);
+  }
+}
+
+/* ---------- Custom utilities ---------- */
+
+/* Centered page column with a responsive gutter. */
+@utility container {
+  width: min(100% - 2 * var(--gutter), 1200px);
+  margin-inline: auto;
+}
+
+/* Loading placeholder with a moving highlight. */
+@utility skeleton {
+  background: linear-gradient(90deg, var(--surface-2), var(--line), var(--surface-2));
+  background-size: 200% 100%;
+  animation: shimmer 1.4s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+  to {
+    background-position: -200% 0;
+  }
+}
+
+/* ---------- Motion preferences ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
