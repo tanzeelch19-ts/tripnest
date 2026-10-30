@@ -1,5 +1,5 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react'
-import { isSupabaseConfigured, supabase } from '../services/supabase'
+import { isSupabaseConfigured, supabase } from '../services/Supabase'
 
 const AuthContext = createContext(null)
 const ACCOUNTS_KEY = 'tripnest-accounts'
