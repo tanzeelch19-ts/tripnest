@@ -11,11 +11,11 @@
  *                                   short delay so loading states are visible
  */
 
-import { api, isApiConfigured, liveApi, PATHS } from './api'
+import { api, isApiConfigured, liveApi, PATHS } from './Api'
 import { AMENITIES, DESTINATIONS, STAYS, sceneImage } from '../data/stays'
 import { LIVE_DESTINATIONS, findDestination } from '../data/Destinations'
 
-export { isApiConfigured } from './api'
+export { isApiConfigured } from './Api'
 export { AMENITIES, PROPERTY_TYPES } from '../data/stays'
 export { LIVE_DESTINATIONS, findDestination } from '../data/Destinations'
 
