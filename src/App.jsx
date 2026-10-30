@@ -16,7 +16,7 @@ const LoginPage = lazy(() => import('./pages/Loginpage'))
 const RegisterPage = lazy(() => import('./pages/Registerpage'))
 const ProfilePage = lazy(() => import('./pages/Profilepage'))
 const SettingsPage = lazy(() => import('./pages/Settingspage'))
-import RequireAuth from './components/RequireAuth'
+import RequireAuth from './components/Requireauth'
 
 function PageLoader() {
   return (
