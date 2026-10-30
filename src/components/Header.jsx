@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Link, NavLink, useLocation } from 'react-router-dom'
 import { Menu, Moon, Settings, Sun, X } from 'lucide-react'
-import { useTheme } from '../context/Themecontext'
+import { useTheme } from '../context/Thecontext'
 import { useWishlist } from '../context/Wishlistcontext'
 import { useAuth } from '../context/Authcontext'
 import { iconBtn } from './ui'
